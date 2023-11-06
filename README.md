@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Todo List App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple Todo List application built with React. It allows you to manage your tasks with the following features:
 
-## Available Scripts
+## File Structure
 
-In the project directory, you can run:
+The project directory is organized as follows:
 
-### `npm start`
+- `src`: Contains the source code of the application.
+  - `Pages`: Contains the main application pages.
+    - `Todo.js`: Defines the `Todopage` component, which is the main page of the application.
+  - `components`: Houses reusable components used in the application.
+    - `List.js`: Represents a single task item in the list.
+    - `Context`: Contains files related to the Context API for state management.
+      - `Todocontext.js`: Defines the Context API for managing the todo list state.
+  - `App.js`: The main entry point of the application.
+  - `list.css`: Styles for the `List` component.
+  - `Todopage.css`: Styles for the `Todopage` component.
+- `public`: Contains static assets and the `index.html` file.
+- `README.md`: This documentation file.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Feel free to explore the project's source code and make changes or additions as needed. The project is organized to make it easy to locate and manage the components and styles for your Todo List App.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+### 1. Add New Tasks
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You can easily add new tasks to your to-do list. Enter the task description in the input field and click the "Add" button to add it to your list.
 
-### `npm run build`
+### 2. Edit Tasks
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Edit your existing tasks whenever needed. Click on the "Edit" button (pencil icon) next to a task, and you can update the task's description.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. Mark Tasks as Completed
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Keep track of completed tasks by marking them as done. Click the checkbox next to a task to mark it as completed. Click it again to undo completion.
 
-### `npm run eject`
+### 4. Delete Tasks
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+If you no longer need a task, you can remove it from your list. Click the "Delete" button (trash can icon) next to a task to delete it. An alert will confirm your action.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 5. Dark Mode Support
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The app provides a dark mode for better visibility in low-light environments. You can switch between light and dark modes for a comfortable user experience. this will works according to system theme
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Context API for State Management
 
-## Learn More
+This Todo List application uses the Context API in React for efficient state management. The Context API allows the sharing of data between components without the need to pass props manually through each level of the component tree. In this application, it is used to manage the state of the todo list and make it accessible to various components.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### `Todocontext.js`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `TodoContext`: This context is created using the `createContext` function and provides an initial state for the todo list. It includes an array of tasks with their respective properties: `id`, `todo`, and `completed`.
 
-### Code Splitting
+- `useTodo`: A custom hook is created to allow components to access the `TodoContext`. This hook is used in components that need to interact with the todo list state.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- `TodoProvider`: This component is used to wrap the main `Todopage` component, providing the context to all its child components. It offers access to the state and functions for adding, updating, completing, and deleting tasks.
 
-### Analyzing the Bundle Size
+### `Todopage.js`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+In the `Todopage` component, the `TodoProvider` wraps the entire application, allowing it to access the state and actions provided by the context.
 
-### Making a Progressive Web App
+````jsx
+import { TodoProvider } from './../../components/Context/Todocontext';
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+const Todopage = () => {
+    // ...
 
-### Advanced Configuration
+    return (
+        <TodoProvider value={{ todos, addTodo, updateTodo, deleteTodo, toggleComplete }}>
+            {/* ... */}
+        </TodoProvider>
+    );
+};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Getting Started
 
-### Deployment
+To use this application on your local machine, follow these steps:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Clone the repository:
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+   ```shell
+   git clone <repository-url>
+````
