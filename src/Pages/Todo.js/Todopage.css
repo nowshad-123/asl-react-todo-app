@@ -1,0 +1,15 @@
+/* Add the shutter animation */
+@keyframes shutter {
+    0% {
+        height: 0 !important;
+    }
+
+    100% {
+        height: 40px !important;
+    }
+}
+
+/* Apply the shutter animation to list items */
+.wave-animation {
+    animation: shutter 2s ease-in-out;
+}
