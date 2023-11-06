@@ -8,7 +8,7 @@ const Todopage = () => {
     const [todo, setTodo] = useState("");
 
     // State to manage the list of todos
-    const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")))
+    const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")) || []);
 
     // Function to add a new task
     const addTodo = (todo) => {
